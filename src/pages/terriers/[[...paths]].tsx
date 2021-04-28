@@ -1,4 +1,5 @@
-import { Image, Box, Stack, Heading, HStack, Container, Center, SimpleGrid, VStack } from "@chakra-ui/react"
+import { Image, Box, Stack, Heading, HStack, Container, Center, SimpleGrid, VStack, Button } from "@chakra-ui/react"
+import NextLink from "next/link"
 import { GetServerSideProps } from "next"
 import React, { FC } from "react"
 import { getRandomTerriers } from "../../lib/randomTerrier"
@@ -28,7 +29,7 @@ const ListPage: FC<{ items: Item[] }> = ({ items }) => {
   </Stack>
 }
 
-const TilePage: FC<{ items: Item[] }> = ({ items }) => {
+const TilePage: FC<{ items: Item[], withDescription: boolean }> = ({ items, withDescription }) => {
   return <SimpleGrid columns={2} gap={4} p={4}>
     {items.map(item => {
       return <Box rounded="base" shadow="base" p={4}>
@@ -39,6 +40,7 @@ const TilePage: FC<{ items: Item[] }> = ({ items }) => {
           <Stack>
             <Heading>{item.name}</Heading>
             <Box color="gray.500">{item.breed} terrier</Box>
+            {withDescription && <Box>{item.description}</Box>}
           </Stack>
         </VStack>
       </Box>
@@ -52,6 +54,18 @@ const Layout: FC<{}> = ({ children }) => {
       <Center>
         <Heading>Pretty Terriers</Heading>
       </Center>
+      <Center>
+        <HStack>
+          <NextLink href="/terriers/list" passHref>
+            <Button rounded="full" as="a">List View</Button>
+          </NextLink>
+          <NextLink href="/terriers/tile" passHref>
+            <Button rounded="full" as="a">Tile View</Button></NextLink>
+          <NextLink href="/terriers/tile/description" passHref>
+            <Button rounded="full" as="a">Tile View (with text)</Button>
+          </NextLink>
+        </HStack>
+      </Center>
       {children}
     </Stack>
   </Container>
@@ -60,7 +74,8 @@ const Layout: FC<{}> = ({ children }) => {
 const DummyRouter: FC<{ items: Item[], paths: string[] }> = ({ items, paths }) => {
   switch (paths[0]) {
     case "tile":
-      return <TilePage items={items} />
+      const withDescription = (paths[1] === "description")
+      return <TilePage items={items} withDescription={withDescription} />
     case "list":
     default:
       return <ListPage items={items} />

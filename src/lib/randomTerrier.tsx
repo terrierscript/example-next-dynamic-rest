@@ -1,6 +1,6 @@
 import axios from "axios"
 import { LoremIpsum } from "lorem-ipsum"
-import { Item } from "../pages/dogs/[[...paths]]"
+import { Item } from "../pages/terriers/[[...paths]]"
 
 const randomTerrier = () => {
   const terriers = ["american",
