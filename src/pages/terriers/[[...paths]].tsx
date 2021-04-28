@@ -1,16 +1,9 @@
 import { Image, Box, Stack, Heading, HStack, Container, Center, SimpleGrid, VStack, Button } from "@chakra-ui/react"
 import NextLink from "next/link"
-import { useRouter } from 'next/router'
 
 import { GetServerSideProps } from "next"
 import React, { FC } from "react"
-import { getRandomTerriers, getTerriers } from "../../lib/randomTerrier"
-export type Item = {
-  name: string,
-  description: string
-  breed: string
-  image: string
-}
+import { getRandomTerriers, getTerriers, Item } from "../../lib/randomTerrier"
 
 const ListPage: FC<{ items: Item[] }> = ({ items }) => {
   return <Stack gap={4} p={4}>
