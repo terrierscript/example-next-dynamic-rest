@@ -1,8 +1,10 @@
 import { Image, Box, Stack, Heading, HStack, Container, Center, SimpleGrid, VStack, Button } from "@chakra-ui/react"
 import NextLink from "next/link"
+import { useRouter } from 'next/router'
+
 import { GetServerSideProps } from "next"
 import React, { FC } from "react"
-import { getRandomTerriers } from "../../lib/randomTerrier"
+import { getRandomTerriers, getTerriers } from "../../lib/randomTerrier"
 export type Item = {
   name: string,
   description: string
@@ -12,8 +14,8 @@ export type Item = {
 
 const ListPage: FC<{ items: Item[] }> = ({ items }) => {
   return <Stack gap={4} p={4}>
-    {items.map(item => {
-      return <Box rounded="base" shadow="base" p={4}>
+    {items.map((item, i) => {
+      return <Box key={i} rounded="base" shadow="base" p={4}>
         <HStack>
           <Box minWidth={100}>
             <Image boxSize={100} rounded="base" objectFit="cover" src={item.image} />
@@ -31,8 +33,8 @@ const ListPage: FC<{ items: Item[] }> = ({ items }) => {
 
 const TilePage: FC<{ items: Item[], withDescription: boolean }> = ({ items, withDescription }) => {
   return <SimpleGrid columns={2} gap={4} p={4}>
-    {items.map(item => {
-      return <Box rounded="base" shadow="base" p={4}>
+    {items.map((item, i) => {
+      return <Box key={i} rounded="base" shadow="base" p={4}>
         <VStack>
           <Box minWidth={200}>
             <Image boxSize={200} rounded="base" objectFit="cover" src={item.image} />
@@ -47,6 +49,7 @@ const TilePage: FC<{ items: Item[], withDescription: boolean }> = ({ items, with
     })}
   </SimpleGrid>
 }
+
 
 const Layout: FC<{}> = ({ children }) => {
   return <Container>
@@ -91,13 +94,14 @@ const Page = (props) => {
 
 export const getServerSideProps: GetServerSideProps = async (req) => {
   const query = req.query
-  const dogs = await getRandomTerriers()
+  const dogs = await getTerriers()
 
   return {
     props: {
       items: dogs,
-      paths: query.paths
+      paths: query.paths ?? []
     },
   }
 }
 export default Page
+
