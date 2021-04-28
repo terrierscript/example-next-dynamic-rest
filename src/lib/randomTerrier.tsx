@@ -1,6 +1,11 @@
 import axios from "axios"
 import { LoremIpsum } from "lorem-ipsum"
-import { Item } from "../pages/terriers/[[...paths]]"
+export type Item = {
+  name: string,
+  description: string
+  breed: string
+  image: string
+}
 
 const randomTerrier = () => {
   const terriers = ["american",
