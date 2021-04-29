@@ -48,7 +48,7 @@ const Layout: FC<{}> = ({ children }) => {
   return <Container>
     <Stack>
       <Center>
-        <Heading>Pretty Terriers</Heading>
+        <Heading>Pretty Terrier Dogs</Heading>
       </Center>
       <Center>
         <HStack>
