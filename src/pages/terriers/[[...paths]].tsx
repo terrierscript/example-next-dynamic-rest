@@ -5,7 +5,7 @@ import { GetServerSideProps } from "next"
 import React, { FC } from "react"
 import { getDogs, Item } from "../../lib/randomTerrier"
 
-const ListPage: FC<{ items: Item[] }> = ({ items }) => {
+const ListView: FC<{ items: Item[] }> = ({ items }) => {
   return <Stack gap={4} p={4}>
     {items.map((item, i) => {
       return <Box key={i} rounded="base" shadow="base" p={4}>
@@ -24,7 +24,7 @@ const ListPage: FC<{ items: Item[] }> = ({ items }) => {
   </Stack>
 }
 
-const TilePage: FC<{ items: Item[], withDescription: boolean }> = ({ items, withDescription }) => {
+const TileView: FC<{ items: Item[], withDescription: boolean }> = ({ items, withDescription }) => {
   return <SimpleGrid columns={2} gap={4} p={4}>
     {items.map((item, i) => {
       return <Box key={i} rounded="base" shadow="base" p={4}>
@@ -71,10 +71,10 @@ const DummyRouter: FC<{ items: Item[], paths: string[] }> = ({ items, paths }) =
   switch (paths[0]) {
     case "tile":
       const withDescription = (paths[1] === "description")
-      return <TilePage items={items} withDescription={withDescription} />
+      return <TileView items={items} withDescription={withDescription} />
     case "list":
     default:
-      return <ListPage items={items} />
+      return <ListView items={items} />
   }
 }
 
@@ -96,5 +96,6 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
     },
   }
 }
+
 export default Page
 
