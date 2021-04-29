@@ -67,7 +67,7 @@ const Layout: FC<{}> = ({ children }) => {
   </Container>
 }
 
-const DummyRouter: FC<{ items: Item[], paths: string[] }> = ({ items, paths }) => {
+const ViewRouter: FC<{ items: Item[], paths: string[] }> = ({ items, paths }) => {
   switch (paths[0]) {
     case "tile":
       const withDescription = (paths[1] === "description")
@@ -80,7 +80,7 @@ const DummyRouter: FC<{ items: Item[], paths: string[] }> = ({ items, paths }) =
 
 const Page = (props) => {
   return <Layout>
-    <DummyRouter {...props} />
+    <ViewRouter {...props} />
   </Layout>
 }
 
