@@ -24,7 +24,7 @@ const ListView: FC<{ items: Item[] }> = ({ items }) => {
   </Stack>
 }
 
-const TileView: FC<{ items: Item[], withDescription: boolean }> = ({ items, withDescription }) => {
+const TileView: FC<{ items: Item[], withDescription?: boolean }> = ({ items, withDescription }) => {
   return <SimpleGrid columns={2} gap={4} p={4}>
     {items.map((item, i) => {
       return <Box key={i} rounded="base" shadow="base" p={4}>
@@ -68,10 +68,12 @@ const Layout: FC<{}> = ({ children }) => {
 }
 
 const ViewRouter: FC<{ items: Item[], paths: string[] }> = ({ items, paths }) => {
-  switch (paths[0]) {
+  const path = paths.join("/")
+  switch (path) {
     case "tile":
-      const withDescription = (paths[1] === "description")
-      return <TileView items={items} withDescription={withDescription} />
+      return <TileView items={items} />
+    case "tile/description":
+      return <TileView items={items} withDescription />
     case "list":
     default:
       return <ListView items={items} />
