@@ -3,7 +3,7 @@ import NextLink from "next/link"
 
 import { GetServerSideProps } from "next"
 import React, { FC } from "react"
-import { getRandomTerriers, getTerriers, Item } from "../../lib/randomTerrier"
+import { getDogs, Item } from "../../lib/randomTerrier"
 
 const ListPage: FC<{ items: Item[] }> = ({ items }) => {
   return <Stack gap={4} p={4}>
@@ -87,7 +87,7 @@ const Page = (props) => {
 
 export const getServerSideProps: GetServerSideProps = async (req) => {
   const query = req.query
-  const dogs = await getTerriers()
+  const dogs = await getDogs()
 
   return {
     props: {

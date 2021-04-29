@@ -48,7 +48,7 @@ export const getRandomTerriers = async (): Promise<Item[]> => {
   }))
 }
 
-export const getTerriers = () => {
+export const getDogs = () => {
   return [
     {
       name: 'dolore',
