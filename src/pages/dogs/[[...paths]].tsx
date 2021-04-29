@@ -52,12 +52,12 @@ const Layout: FC<{}> = ({ children }) => {
       </Center>
       <Center>
         <HStack>
-          <NextLink href="/terriers/list" passHref>
+          <NextLink href="/dogs/list" passHref>
             <Button rounded="full" as="a">List View</Button>
           </NextLink>
-          <NextLink href="/terriers/tile" passHref>
+          <NextLink href="/dogs/tile" passHref>
             <Button rounded="full" as="a">Tile View</Button></NextLink>
-          <NextLink href="/terriers/tile/description" passHref>
+          <NextLink href="/dogs/tile/description" passHref>
             <Button rounded="full" as="a">Tile View (with text)</Button>
           </NextLink>
         </HStack>
